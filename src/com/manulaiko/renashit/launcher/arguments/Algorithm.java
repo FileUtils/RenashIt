@@ -55,15 +55,9 @@ public class Algorithm extends Argument
                 Settings.algorithm = Settings.getAlgorithm(Settings.SHA256);
                 break;
 
-            case "sha512":
-            case "sha-512":
-                Settings.algorithm = Settings.getAlgorithm(Settings.SHA512);
-                break;
-
             default:
                 Console.println("`"+ algorithm +"` isn't a valid algorithm! Use '-h' for a list of algorithms.");
                 Console.println("Using MD5 instead.");
-                this.value("MD5");
         }
 
         Console.debug(Settings.algorithm.getAlgorithm() +" algorithm will be used!");

@@ -22,7 +22,6 @@ public class Settings
     public static final String MD5    = "md5";
     public static final String SHA1   = "sha-1";
     public static final String SHA256 = "sha-256";
-    public static final String SHA512 = "sha-512";
 
     /**
      * Whether we're running in debug mode or not.

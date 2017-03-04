@@ -57,7 +57,6 @@ public class Help extends Argument
                 "    MD5\n"                                                                                +
                 "    SHA1\n"                                                                               +
                 "    SHA256\n"                                                                             +
-                "    SHA512\n"                                                                             +
                 "\n"                                                                                       +
                 "Examples:\n"                                                                              +
                 "    java -jar renashit.jar -d -r -p=Documents/Images/4Chum\n"                             +
