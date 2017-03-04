@@ -42,19 +42,22 @@ public class Algorithm extends Argument
         switch(algorithm)
         {
             case "md5":
-                Settings.algorithm = Settings.MD5;
+                Settings.algorithm = Settings.getAlgorithm(Settings.MD5);
                 break;
 
             case "sha1":
-                Settings.algorithm = Settings.SHA1;
+            case "sha-1":
+                Settings.algorithm = Settings.getAlgorithm(Settings.SHA1);
                 break;
 
             case "sha256":
-                Settings.algorithm = Settings.SHA256;
+            case "sha-256":
+                Settings.algorithm = Settings.getAlgorithm(Settings.SHA256);
                 break;
 
             case "sha512":
-                Settings.algorithm = Settings.SHA512;
+            case "sha-512":
+                Settings.algorithm = Settings.getAlgorithm(Settings.SHA512);
                 break;
 
             default:
@@ -63,6 +66,6 @@ public class Algorithm extends Argument
                 this.value("MD5");
         }
 
-        Console.debug(this.value().toUpperCase() +" algorithm will be used!");
+        Console.debug(Settings.algorithm.getAlgorithm() +" algorithm will be used!");
     }
 }
