@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
@@ -303,7 +304,7 @@ public class Directory
     {
         for(File f : this.listFiles()) {
             Pattern p = Pattern.compile(regexp);
-            Matcher m = p.matcher(f.name);
+            Matcher m = p.matcher(f.path);
 
             if(m.find()) {
                 return f;
@@ -311,6 +312,41 @@ public class Directory
         }
 
         throw new FileNotFoundException(regexp);
+    }
+
+    /**
+     * Returns various file based on given regular expression.
+     *
+     * @param regexp File name regular expression.
+     *
+     * @return All occurrence of `regexp`.
+     */
+    public List<File> getFilesByRegexp(String regexp)
+    {
+        return this.getFilesByRegexp(Pattern.compile(regexp));
+    }
+
+
+    /**
+     * Returns various file based on given regular expression.
+     *
+     * @param regexp File name regular expression.
+     *
+     * @return All occurrence of `regexp`.
+     */
+    public List<File> getFilesByRegexp(Pattern regexp)
+    {
+        ArrayList<File> files = new ArrayList<>();
+
+        for(File f : this.listFiles()) {
+            Matcher m = regexp.matcher(f.path);
+
+            if(m.find()) {
+                files.add(f);
+            }
+        }
+
+        return files;
     }
 
     /**
@@ -325,7 +361,7 @@ public class Directory
     public Directory getDirectory(String directory) throws FileNotFoundException
     {
         for(Directory d : this.listDirectories()) {
-            if(directory.equals(d.name)) {
+            if(directory.equals(d.path)) {
                 return d;
             }
         }
@@ -346,7 +382,7 @@ public class Directory
     {
         for(Directory d : this.listDirectories()) {
             Pattern p = Pattern.compile(regexp);
-            Matcher m = p.matcher(d.name);
+            Matcher m = p.matcher(d.path);
 
             if(m.find()) {
                 return d;
@@ -354,6 +390,41 @@ public class Directory
         }
 
         throw new FileNotFoundException(regexp);
+    }
+
+    /**
+     * Returns various directories based on given regular expression.
+     *
+     * @param regexp Directory name regular expression.
+     *
+     * @return All occurrence of `regexp`.
+     */
+    public List<File> getDirectoriesByRegexp(String regexp)
+    {
+        return this.getFilesByRegexp(Pattern.compile(regexp));
+    }
+
+
+    /**
+     * Returns various directories based on given regular expression.
+     *
+     * @param regexp Directory name regular expression.
+     *
+     * @return All occurrence of `regexp`.
+     */
+    public List<Directory> getDirectoriesByRegexp(Pattern regexp)
+    {
+        ArrayList<Directory> dirs = new ArrayList<>();
+
+        for(Directory d : this.listDirectories()) {
+            Matcher m = regexp.matcher(d.name);
+
+            if(m.find()) {
+                dirs.add(d);
+            }
+        }
+
+        return dirs;
     }
 
     /**
